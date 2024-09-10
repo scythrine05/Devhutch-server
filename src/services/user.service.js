@@ -6,11 +6,10 @@ const createUser = async (userId, userData) => {
   const existingUser = await User.findById(userId);
   if (existingUser) return existingUser;
 
-  //Check if username exist (Specially in Oauth)
   const username = userData.username;
   let modifiedUsername;
-  const usernameExist = await checkUsernameExists(username);
-  if (usernameExist) {
+  const usernameCount = await countUserDocuments("username", username);
+  if (usernameCount > 0) {
     const randomHex = generateRandomHex();
     modifiedUsername = `${username}${randomHex}`; //Modify Username
   }
@@ -26,28 +25,13 @@ const createUser = async (userId, userData) => {
   return await newUser.save();
 };
 
-const checkUsernameExists = async (username) => {
+const countUserDocuments = async (field, value) => {
   try {
-    const count = await User.countDocuments({ username });
-    return count > 0;
-  } catch (error) {
-    console.error("=> Error : username exist check: \n", error, "\n");
-    throw error;
+    const count = await User.countDocuments({ [field]: value });
+    return count;
+  } catch (err) {
+    throw err;
   }
-};
-
-const checkEmailExists = async (email) => {
-  try {
-    const count = await User.countDocuments({ email });
-    return count > 0;
-  } catch (error) {
-    console.error("=> Error : email exist check: \n", error, "\n");
-    throw error;
-  }
-};
-
-const getUserById = async (id) => {
-  return await User.findById(id);
 };
 
 const updateUser = async (id, userData) => {
@@ -58,10 +42,9 @@ const deleteUser = async (id) => {
   return await User.findByIdAndDelete(id);
 };
 
-const getUserAccount = async (identifier) => {
-  return await User.findOne({
-    $or: [{ _id: identifier }, { username: identifier }],
-  });
+const getUserByIdentifier = async (field, value) => {
+  const query = field === "_id" ? { _id: value } : { username: value };
+  return await User.findOne(query);
 };
 
 const getAllUsers = async () => {
@@ -69,12 +52,10 @@ const getAllUsers = async () => {
 };
 
 module.exports = {
+  countUserDocuments,
   createUser,
-  getUserById,
-  checkUsernameExists,
-  checkEmailExists,
   updateUser,
   deleteUser,
-  getUserAccount,
+  getUserByIdentifier,
   getAllUsers,
 };

@@ -14,6 +14,6 @@ router.use((err, req, res, next) => {
 router.use(verifyToken);
 
 
-router.get("/:identifier", accountController.getUserAccount);
+router.get("/:field/:value", accountController.getUserAccount);
 
 module.exports = router;

@@ -12,8 +12,8 @@ router.use((err, req, res, next) => {
   res.status(400).json({ error: `Auth Error: ${err.message}` });
 });
 
-router.get("/save-token", (req, res) => {
-  res.status(200).json({ message: "Token Saved" });
+router.get("/set-token", (req, res) => {
+  res.status(200).json({ message: "Token Set" });
 });
 
 router.get("/check-token", (req, res) => {

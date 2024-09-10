@@ -8,7 +8,6 @@ const projectRoutes = require("./project.route");
 
 router.get("/", (req, res) => {
   res.send("Welcome to Devtiny Server");
-  console.log("")
 });
 
 //routes
