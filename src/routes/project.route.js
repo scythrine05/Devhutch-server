@@ -12,7 +12,15 @@ router.use((err, req, res, next) => {
 router.use(verifyToken);
 
 router.get("/", projectController.getAllProjects);
+router.get("/:projectId", projectController.getProjectById);
 router.get("/user/:userId", projectController.getProjectsByUserId);
+router.get(
+  "/:projectId/ishyped/:userId",
+  projectController.isProjectHypedByUser
+);
 router.post("/", projectController.createProject);
+router.post("/hype", projectController.projectHypeById);
+router.put('/:projectId')
+router.delete("/:userId", projectController.deleteProjectsByUserId);
 
 module.exports = router;

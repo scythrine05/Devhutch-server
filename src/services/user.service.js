@@ -38,12 +38,20 @@ const updateUser = async (id, userData) => {
   return await User.findByIdAndUpdate(id, userData, { new: true });
 };
 
+exports.updateProfileImage = async (userId, imageUrl) => {
+  return await User.findOneAndUpdate(
+    { uid: userId },
+    { profileImage: imageUrl },
+    { new: true }
+  );
+};
+
 const deleteUser = async (id) => {
   return await User.findByIdAndDelete(id);
 };
 
 const getUserByIdentifier = async (field, value) => {
-  const query = field === "_id" ? { _id: value } : { username: value };
+  const query = field === "userId" ? { _id: value } : { username: value };
   return await User.findOne(query);
 };
 
@@ -52,8 +60,8 @@ const getAllUsers = async () => {
 };
 
 module.exports = {
-  countUserDocuments,
   createUser,
+  countUserDocuments,
   updateUser,
   deleteUser,
   getUserByIdentifier,

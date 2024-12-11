@@ -13,15 +13,19 @@ const ProjectSchema = new mongoose.Schema(
     },
     tags: {
       type: [String],
-      required: true,
+      //required: true,
     },
     links: {
-      type: [String],
-      required: true,
+      type: [
+        {
+          name: { type: String /*required: true*/ },
+          url: { type: String /*required: true*/ },
+        },
+      ],
+      //required: true,
     },
     images: {
       type: [String],
-      //required: true,
     },
     description: {
       type: String,
@@ -31,10 +35,20 @@ const ProjectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hypes: {
+      type: [{ userId: { type: String } }],
+      default: [],
+    },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+ProjectSchema.virtual("hypeCount").get(function () {
+  return this.hypes.length;
+});
 
 module.exports = mongoose.model("Project", ProjectSchema);
