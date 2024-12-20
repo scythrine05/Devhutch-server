@@ -35,7 +35,7 @@ exports.isProjectHypedByUser = asyncHandler(async (req, res) => {
   res.status(201).json(response);
 });
 
-exports.deleteProjectsByUserId = asyncHandler(async (req, res) => {
+exports.deleteAllProjectsByUserId = asyncHandler(async (req, res) => {
   const { userId } = req.params;
   await projectService.deleteUserIdFromHypes(userId);
   const response = await projectService.deleteProjectsByUserId(userId);

@@ -64,7 +64,7 @@ const isProjectHypedByUser = async (projectId, userId) => {
   return { isHype };
 };
 
-const deleteProjectsByUserId = async (userId) => {
+const deleteAllProjectsByUserId = async (userId) => {
   const count = await Project.countDocuments({ authorId: userId });
   if (count === 0) {
     return;
@@ -85,13 +85,35 @@ const deleteUserIdFromHypes = async (userId) => {
   return;
 };
 
+const deleteProjectById = async (projectId) => {
+  const result = await Project.findByIdAndDelete(projectId);
+  if (!result) {
+    throw new Error("Project not found or already deleted");
+  }
+  return result;
+};
+
+const updateProjectById = async (projectId, updateData) => {
+  const updatedProject = await Project.findByIdAndUpdate(
+    projectId,
+    { $set: updateData },
+    { new: true, runValidators: true }
+  );
+  if (!updatedProject) {
+    throw new Error("Project not found");
+  }
+  return updatedProject;
+};
+
 module.exports = {
   createProject,
   getAllProjects,
   getProjectById,
   getProjectsByUserId,
   projectHypeById,
+  deleteProjectById,
   isProjectHypedByUser,
-  deleteProjectsByUserId,
+  deleteAllProjectsByUserId,
   deleteUserIdFromHypes,
+  deleteProjectById,
 };
