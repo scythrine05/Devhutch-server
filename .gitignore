@@ -28,4 +28,4 @@ dist-ssr
 
 
 #Firebase
-FirebaseService.json
+src/FirebaseService.json
