@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const admin = require("firebase-admin");
 const authController = require("../controllers/auth.controller");
 const verifyToken = require("../middlewares/verifyToken");
 
@@ -17,7 +16,6 @@ router.get("/set-token", (req, res) => {
 });
 
 router.get("/check-token", (req, res) => {
-  console.log(req.user.uid);
   res.status(200).json({ message: "Token valid" });
 });
 
