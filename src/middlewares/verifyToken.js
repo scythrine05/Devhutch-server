@@ -1,3 +1,4 @@
+require("dotenv").config();
 const admin = require("firebase-admin");
 
 const verifyToken = async (req, res, next) => {
@@ -9,7 +10,7 @@ const verifyToken = async (req, res, next) => {
       res.cookie("token", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",
-        sameSite: "None",
+        sameSite: 'None',
         maxAge: 15 * 60 * 1000,
       });
     next();
