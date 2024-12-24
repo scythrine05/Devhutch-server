@@ -2,14 +2,17 @@ require("dotenv").config();
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (origin === process.env.CLIENT_URL || !origin) {
-      callback(null, true);
+    const allowedOrigins = [process.env.CLIENT_URL];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
     } else {
-      console.log(process.env.CLIENT_URL);
+      console.error(`Blocked by CORS: ${origin}`);
       callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,   
+  credentials: true,
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  allowedHeaders: "Content-Type,Authorization",
 };
 
 module.exports = corsOptions;
