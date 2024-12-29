@@ -16,7 +16,7 @@ connectDB()
   .then(() => {
     app.use("/api", routes);
 
-    server.listen(port, () =>
+    server.listen(port, "0.0.0.0", () =>
       console.log("Server is listening on port: ", port)
     );
   })
