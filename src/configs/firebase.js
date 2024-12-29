@@ -1,10 +1,12 @@
 require("dotenv").config();
 
 const firebaseAdmin = require("firebase-admin");
-var serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
+var serviceAccountPath = process.env.GOOGLE_APPLICATION_CREDENTIALS_PATH;
 
 if (!serviceAccountPath) {
-  throw new Error("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set!");
+  throw new Error(
+    "GOOGLE_APPLICATION_CREDENTIALS environment variable is not set!"
+  );
 }
 var serviceAccount = require(serviceAccountPath);
 
