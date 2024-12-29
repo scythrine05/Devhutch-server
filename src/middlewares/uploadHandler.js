@@ -10,4 +10,4 @@ const uploadMiddleware = (fieldName, maxCount = 1) => {
     : upload.single(fieldName);
 };
 
-module.exports = uploadMiddleware;
+module.exports = { uploadMiddleware };

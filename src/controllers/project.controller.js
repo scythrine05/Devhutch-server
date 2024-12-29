@@ -23,6 +23,22 @@ exports.getProjectById = asyncHandler(async (req, res) => {
   res.status(200).json(project);
 });
 
+exports.updateProjectById = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  const updatedData = req.body;
+  const updatedProject = await projectService.updateProjectById(
+    projectId,
+    updatedData
+  );
+  res.status(200).json(updatedProject);
+});
+
+exports.deleteProjectById = asyncHandler(async (req, res) => {
+  const { projectId } = req.params;
+  await projectService.deleteProjectById(projectId);
+  res.status(200).json({ message: "Project deleted successfully." });
+});
+
 exports.projectHypeById = asyncHandler(async (req, res) => {
   const { projectId, userId } = req.body;
   const response = await projectService.projectHypeById(projectId, userId);

@@ -22,6 +22,7 @@ const getAllProjects = async () => {
       return {
         ...projectData,
         authorUsername: user ? user.username : "Unknown",
+        authorProfileImage: user ? user.profileImage : null,
       };
     })
   );
@@ -40,6 +41,7 @@ const getProjectById = async (projectId) => {
   return {
     ...projectData,
     authorUsername: user ? user.username : "Unknown",
+    authorProfileImage: user ? user.profileImage : null,
   };
 };
 
@@ -86,23 +88,15 @@ const deleteUserIdFromHypes = async (userId) => {
 };
 
 const deleteProjectById = async (projectId) => {
-  const result = await Project.findByIdAndDelete(projectId);
-  if (!result) {
-    throw new Error("Project not found or already deleted");
-  }
-  return result;
+  return await Project.findByIdAndDelete(projectId);
 };
 
 const updateProjectById = async (projectId, updateData) => {
-  const updatedProject = await Project.findByIdAndUpdate(
+  return await Project.findByIdAndUpdate(
     projectId,
     { $set: updateData },
     { new: true, runValidators: true }
   );
-  if (!updatedProject) {
-    throw new Error("Project not found");
-  }
-  return updatedProject;
 };
 
 module.exports = {
@@ -112,8 +106,8 @@ module.exports = {
   getProjectsByUserId,
   projectHypeById,
   deleteProjectById,
+  updateProjectById,
   isProjectHypedByUser,
   deleteAllProjectsByUserId,
   deleteUserIdFromHypes,
-  deleteProjectById,
 };

@@ -13,23 +13,26 @@ const ProjectSchema = new mongoose.Schema(
     },
     tags: {
       type: [String],
-      //required: true,
+      required: true,
     },
     links: {
       type: [
         {
-          name: { type: String /*required: true*/ },
-          url: { type: String /*required: true*/ },
+          name: { type: String, required: true },
+          url: { type: String, required: true },
         },
       ],
-      //required: true,
     },
-    images: {
+    imageUrls: {
       type: [String],
+      required: true,
+    },
+    imageBucketId: {
+      type: String,
+      required: true,
     },
     description: {
       type: String,
-      required: true,
     },
     authorId: {
       type: String,

@@ -38,9 +38,9 @@ const updateUser = async (id, userData) => {
   return await User.findByIdAndUpdate(id, userData, { new: true });
 };
 
-exports.updateProfileImage = async (userId, imageUrl) => {
+const updateProfileImage = async (userId, imageUrl) => {
   return await User.findOneAndUpdate(
-    { uid: userId },
+    { _id: userId },
     { profileImage: imageUrl },
     { new: true }
   );
@@ -66,4 +66,5 @@ module.exports = {
   deleteUser,
   getUserByIdentifier,
   getAllUsers,
+  updateProfileImage,
 };

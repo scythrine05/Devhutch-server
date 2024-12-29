@@ -10,6 +10,7 @@ const { port, corsOptions, connectDB } = require("./src/configs");
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 connectDB()
   .then(() => {
