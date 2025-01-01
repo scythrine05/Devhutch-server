@@ -8,7 +8,7 @@ const projectRoutes = require("./project.route");
 
 
 router.get("/", (req, res) => {
-  res.send("Welcome to Devhutch Server");
+  res.send("Welcome to Devtation Server");
 });
 
 //routes
