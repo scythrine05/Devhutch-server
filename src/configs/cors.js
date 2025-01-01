@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const corsOptions = {
   origin: function (origin, callback) {
-    const allowedOrigins = [process.env.CLIENT_URL];
+    const allowedOrigins = process.env.CLIENT_URLS.split(",");
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Allow the request
     } else {
