@@ -37,7 +37,7 @@ const uploadToS3Bucket = async (file, folder) => {
   }
 };
 
-export const deleteFromS3Bucket = async (url, bucketId) => {
+const deleteFromS3Bucket = async (url, bucketId) => {
   const key = `${bucketId}/${url.split(`${bucketId}/`)[1]}`;
   const params = {
     Bucket: process.env.AWS_S3_BUCKET_NAME,
@@ -73,5 +73,5 @@ const updateToS3Bucket = async (urls, newFiles, bucketId) => {
 module.exports = {
   uploadToS3Bucket,
   updateToS3Bucket,
-  deleteFromS3Bucket
+  deleteFromS3Bucket,
 };
