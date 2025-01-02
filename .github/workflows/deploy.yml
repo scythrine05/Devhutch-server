@@ -39,7 +39,7 @@ jobs:
             -v /home/ec2-user/secrets/FirebaseService.json:${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }} \
             -e PORT=${{ secrets.PORT }} \
             -e NODE_ENV=${{ secrets.NODE_ENV }} \
-            -e CLIENT_URL=${{ secrets.CLIENT_URL }} \
+            -e CLIENT_URLS=${{ secrets.CLIENT_URLS }} \
             -e MONGO_URI=${{ secrets.MONGO_URI }} \
             -e GOOGLE_APPLICATION_CREDENTIALS_PATH=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }} \
             -e RECAPTCHA_SITE_SECRET=${{ secrets.RECAPTCHA_SITE_SECRET }} \
