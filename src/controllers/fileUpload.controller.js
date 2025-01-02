@@ -15,6 +15,7 @@ exports.uploadImages = asyncHandler(async (req, res) => {
   const uploadPromises = req.files.map(async (file) => {
     const optimizedBuffer = await optimizeImage(file.buffer, "webp", 80);
     file.buffer = optimizedBuffer;
+    file.mimetype = "image/webp";
     return uploadToS3Bucket(file, `images/${bucketId}/`);
   });
   const uploadedURLs = await Promise.all(uploadPromises);
@@ -30,7 +31,7 @@ exports.updateImages = asyncHandler(async (req, res) => {
   const optimizedFiles = await Promise.all(
     files.map(async (file) => {
       const optimizedBuffer = await optimizeImage(file.buffer);
-      return { ...file, buffer: optimizedBuffer };
+      return { ...file, buffer: optimizedBuffer, mimetype: "image/webp" };
     })
   );
   const uploadedPromised = await updateToS3Bucket(
@@ -46,8 +47,10 @@ exports.uploadDisplayPicture = asyncHandler(async (req, res) => {
   if (!req.file) {
     return res.status(400).send({ error: "No file uploaded" });
   }
-  const optimizedBuffer = await optimizeImage(req.file.buffer, "webp", 90);
+
+  const optimizedBuffer = await optimizeImage(req.file.buffer, "webp", 50);
   req.file.buffer = optimizedBuffer;
+  req.file.mimetype = "image/webp";
   const publicUrl = await uploadToS3Bucket(
     req.file,
     `profile-pictures/${req.user.uid}/`

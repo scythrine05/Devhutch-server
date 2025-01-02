@@ -38,6 +38,11 @@ const updateUser = async (id, userData) => {
   return await User.findByIdAndUpdate(id, userData, { new: true });
 };
 
+const getProfileImage = async (userId) => {
+  const user = await User.findById(userId).select("profileImage");
+  return user ? user.profileImage : null;
+};
+
 const updateProfileImage = async (userId, imageUrl) => {
   return await User.findOneAndUpdate(
     { _id: userId },
@@ -67,4 +72,5 @@ module.exports = {
   getUserByIdentifier,
   getAllUsers,
   updateProfileImage,
+  getProfileImage,
 };
