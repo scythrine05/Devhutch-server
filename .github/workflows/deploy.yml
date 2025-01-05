@@ -1,4 +1,4 @@
-name: Devtation CI/CD Pipeline
+name: Devtation server CI/CD pipeline
 
 on:
   push:

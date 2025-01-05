@@ -55,7 +55,6 @@ const projectHypeById = async (projectId, userId) => {
   } else {
     project.hypes.push({ userId });
   }
-
   return await project.save();
 };
 

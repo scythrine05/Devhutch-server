@@ -7,6 +7,12 @@ const {
 const { uploadMiddleware } = require("../middlewares/uploadHandler");
 const verifyToken = require("../middlewares/verifyToken");
 
+//Error Handling
+router.use((err, req, res, next) => {
+  console.error("File upload Error:", err.message);
+  res.status(400).json({ error: `File upload Error: ${err.message}` });
+});
+
 router.use(verifyToken);
 
 router.post(

@@ -22,6 +22,6 @@ router.post("/", projectController.createProject);
 router.post("/hype", projectController.projectHypeById);
 router.put("/:projectId", projectController.updateProjectById);
 router.delete("/:projectId", projectController.deleteProjectById);
-router.delete("/:userId", projectController.deleteAllProjectsByUserId);
+router.delete("/user/:userId", projectController.deleteAllProjectsByUserId);
 
 module.exports = router;
