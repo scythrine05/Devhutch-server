@@ -37,15 +37,15 @@ jobs:
             sudo docker run \
             -d --name devtation-server-container \
             -v /home/ec2-user/secrets/FirebaseService.json:${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }} \
-            -e PORT=${{ secrets.PORT }} \
-            -e NODE_ENV=${{ secrets.NODE_ENV }} \
-            -e CLIENT_URLS=${{ secrets.CLIENT_URLS }} \
-            -e MONGO_URI=${{ secrets.MONGO_URI }} \
-            -e GOOGLE_APPLICATION_CREDENTIALS_PATH=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }} \
-            -e RECAPTCHA_SITE_SECRET=${{ secrets.RECAPTCHA_SITE_SECRET }} \
-            -e AWS_REGION=${{ secrets.AWS_REGION }} \
-            -e AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-            -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
-            -e AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }} \
+            -e "PORT=${{ secrets.PORT }}" \
+            -e "NODE_ENV=${{ secrets.NODE_ENV }}" \
+            -e "CLIENT_URLS=${{ secrets.CLIENT_URLS }}" \
+            -e "MONGO_URI=${{ secrets.MONGO_URI }}" \
+            -e "GOOGLE_APPLICATION_CREDENTIALS_PATH=${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_PATH }}" \
+            -e "RECAPTCHA_SITE_SECRET=${{ secrets.RECAPTCHA_SITE_SECRET }}" \
+            -e "AWS_REGION=${{ secrets.AWS_REGION }}" \
+            -e "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" \
+            -e "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" \
+            -e "AWS_S3_BUCKET_NAME=${{ secrets.AWS_S3_BUCKET_NAME }}" \
             -p 5000:5000 \
-            ${{secrets.DOCKER_USERNAME}}/devtation-server:latest
+            ${{ secrets.DOCKER_USERNAME }}/devtation-server:latest
